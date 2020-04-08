@@ -5,10 +5,10 @@ import 'package:quizapp/screen/answer-screen.dart';
 import 'package:quizapp/screen/summary.dart';
 import 'package:quizapp/widgets/route-animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'button.dart';
-import 'white-text.dart';
+import '../widgets/button.dart';
+import '../widgets/white-text.dart';
 
-class ShowMcq extends StatefulWidget {
+class Mcq extends StatefulWidget {
   final String q;
   final String a1;
   final String a2;
@@ -20,14 +20,14 @@ class ShowMcq extends StatefulWidget {
   final int qLength;
   final int no;
 
-  const ShowMcq({Key key, this.q, this.a1, this.a2, this.a3, this.a4, this.answer, this.qNo, this.quizName, this.no, this.qLength}) : super(key: key);
+  const Mcq({Key key, this.q, this.a1, this.a2, this.a3, this.a4, this.answer, this.qNo, this.quizName, this.no, this.qLength}) : super(key: key);
 
 
   @override
-  _ShowMcqState createState() => _ShowMcqState();
+  _McqState createState() => _McqState();
 }
 
-class _ShowMcqState extends State<ShowMcq> {
+class _McqState extends State<Mcq> {
   String selectedRadio;
 
   setSelectedRadio(String val) async {
@@ -88,7 +88,9 @@ class _ShowMcqState extends State<ShowMcq> {
               Radio(value: '1', groupValue: selectedRadio, onChanged: (value){
                 setSelectedRadio(value);
               }),
-              Text(widget.a1,style: TextStyle(fontWeight: FontWeight.w900),)
+              SizedBox(
+                  width: MediaQuery.of(context).size.width-90,
+                  child: Text(widget.a1,style: TextStyle(fontWeight: FontWeight.w900),))
             ],
           ),
           Row(
@@ -96,7 +98,9 @@ class _ShowMcqState extends State<ShowMcq> {
               Radio(value: '2', groupValue: selectedRadio, onChanged: (value){
                 setSelectedRadio(value);
               }),
-              Text(widget.a2,style: TextStyle(fontWeight: FontWeight.w900),)
+              SizedBox(
+                  width: MediaQuery.of(context).size.width-90,
+                  child: Text(widget.a2,style: TextStyle(fontWeight: FontWeight.w900),))
             ],
           ),
           Row(
@@ -104,7 +108,9 @@ class _ShowMcqState extends State<ShowMcq> {
               Radio(value: '3', groupValue: selectedRadio, onChanged: (value){
                 setSelectedRadio(value);
               }),
-              Text(widget.a3,style: TextStyle(fontWeight: FontWeight.w900),)
+              SizedBox(
+                  width: MediaQuery.of(context).size.width-90,
+                  child: Text(widget.a3,style: TextStyle(fontWeight: FontWeight.w900),))
             ],
           ),
           Row(
@@ -112,7 +118,9 @@ class _ShowMcqState extends State<ShowMcq> {
               Radio(value: '4', groupValue: selectedRadio, onChanged: (value){
                 setSelectedRadio(value);
               }),
-              Text(widget.a4,style: TextStyle(fontWeight: FontWeight.w900),)
+              SizedBox(
+                  width: MediaQuery.of(context).size.width-90,
+                  child: Text(widget.a4,style: TextStyle(fontWeight: FontWeight.w900),))
             ],
           ),
 
@@ -131,10 +139,7 @@ class _ShowMcqState extends State<ShowMcq> {
                 Navigator.push(context, MyCustomRoute(builder: (context){
                   return Answer(quizName: widget.quizName,no: y+1,);}));
               }
-
-
-
-            },),
+              },),
           )
 
 

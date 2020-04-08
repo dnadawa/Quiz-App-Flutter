@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'answer-screen.dart';
 
-class ShowMcq2Options extends StatefulWidget {
+class Mcq2Options extends StatefulWidget {
   final String q;
   final int no;
   final String a1;
@@ -21,7 +21,7 @@ class ShowMcq2Options extends StatefulWidget {
   final int qLength;
   final String quizName;
 
-  const ShowMcq2Options(
+  const Mcq2Options(
       {Key key,
       this.q,
       this.a1,
@@ -35,10 +35,10 @@ class ShowMcq2Options extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ShowMcq2OptionsState createState() => _ShowMcq2OptionsState();
+  _Mcq2OptionsState createState() => _Mcq2OptionsState();
 }
 
-class _ShowMcq2OptionsState extends State<ShowMcq2Options> {
+class _Mcq2OptionsState extends State<Mcq2Options> {
   bool ans1, ans3, ans4, ans2;
 
   @override
@@ -82,9 +82,12 @@ class _ShowMcq2OptionsState extends State<ShowMcq2Options> {
                     ans1 = x;
                   });
                 }),
-            Text(
-              widget.a1,
-              style: TextStyle(fontWeight: FontWeight.w900),
+            SizedBox(
+              width: MediaQuery.of(context).size.width-90,
+              child: Text(
+                widget.a1,
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
             )
           ],
         ),
@@ -97,9 +100,12 @@ class _ShowMcq2OptionsState extends State<ShowMcq2Options> {
                     ans2 = x;
                   });
                 }),
-            Text(
+            SizedBox(
+              width: MediaQuery.of(context).size.width-90,
+            child: Text(
               widget.a2,
               style: TextStyle(fontWeight: FontWeight.w900),
+            ),
             )
           ],
         ),
@@ -112,9 +118,12 @@ class _ShowMcq2OptionsState extends State<ShowMcq2Options> {
                     ans3 = x;
                   });
                 }),
-            Text(
-              widget.a3,
-              style: TextStyle(fontWeight: FontWeight.w900),
+            SizedBox(
+              width: MediaQuery.of(context).size.width-90,
+              child: Text(
+                widget.a3,
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
             )
           ],
         ),
@@ -127,9 +136,12 @@ class _ShowMcq2OptionsState extends State<ShowMcq2Options> {
                     ans4 = x;
                   });
                 }),
-            Text(
-              widget.a4,
-              style: TextStyle(fontWeight: FontWeight.w900),
+            SizedBox(
+              width: MediaQuery.of(context).size.width-90,
+              child: Text(
+                widget.a4,
+                style: TextStyle(fontWeight: FontWeight.w900),
+              ),
             )
           ],
         ),

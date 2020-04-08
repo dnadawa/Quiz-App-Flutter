@@ -10,7 +10,7 @@ import 'package:quizapp/widgets/white-text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Single extends StatefulWidget {
+class SingleAnswer extends StatefulWidget {
   final String q;
   final String answer;
   final String qNo;
@@ -18,14 +18,14 @@ class Single extends StatefulWidget {
   final int qLength;
   final int no;
 
-  const Single({Key key, this.answer, this.qNo, this.quizName, this.no, this.q, this.qLength}) : super(key: key);
+  const SingleAnswer({Key key, this.answer, this.qNo, this.quizName, this.no, this.q, this.qLength}) : super(key: key);
 
 
   @override
-  _SingleState createState() => _SingleState();
+  _SingleAnswerState createState() => _SingleAnswerState();
 }
 
-class _SingleState extends State<Single> {
+class _SingleAnswerState extends State<SingleAnswer> {
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {

@@ -72,113 +72,123 @@ class _Mcq5OptionsState extends State<Mcq5Options> {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white
       ),
-      child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
-              borderRadius: BorderRadius.circular(15),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: CustomText(text: widget.q,align: TextAlign.center,size: 20,),
+              ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomText(text: widget.q,align: TextAlign.center,size: 20,),
+
+            Row(
+              children: <Widget>[
+                Radio(value: '1', groupValue: selectedRadio, onChanged: (value){
+                  setSelectedRadio(value);
+                }),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width-90,
+                    child: Text(widget.a1,style: TextStyle(fontWeight: FontWeight.w900),))
+              ],
             ),
-          ),
+            Row(
+              children: <Widget>[
+                Radio(value: '2', groupValue: selectedRadio, onChanged: (value){
+                  setSelectedRadio(value);
+                }),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width-90,
+                    child: Text(widget.a2,style: TextStyle(fontWeight: FontWeight.w900),))
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Radio(value: '3', groupValue: selectedRadio, onChanged: (value){
+                  setSelectedRadio(value);
+                }),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width-90,
+                    child: Text(widget.a3,style: TextStyle(fontWeight: FontWeight.w900),))
+              ],
+            ),
+            Row(
+              children: <Widget>[
+                Radio(value: '4', groupValue: selectedRadio, onChanged: (value){
+                  setSelectedRadio(value);
+                }),
+                SizedBox(
+                    width: MediaQuery.of(context).size.width-90,
+                    child: Text(widget.a4,style: TextStyle(fontWeight: FontWeight.w900),))
+              ],
+            ),
 
-          Row(
-            children: <Widget>[
-              Radio(value: '1', groupValue: selectedRadio, onChanged: (value){
-                setSelectedRadio(value);
-              }),
-              Text(widget.a1,style: TextStyle(fontWeight: FontWeight.w900),)
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Radio(value: '2', groupValue: selectedRadio, onChanged: (value){
-                setSelectedRadio(value);
-              }),
-              Text(widget.a2,style: TextStyle(fontWeight: FontWeight.w900),)
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Radio(value: '3', groupValue: selectedRadio, onChanged: (value){
-                setSelectedRadio(value);
-              }),
-              Text(widget.a3,style: TextStyle(fontWeight: FontWeight.w900),)
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Radio(value: '4', groupValue: selectedRadio, onChanged: (value){
-                setSelectedRadio(value);
-              }),
-              Text(widget.a4,style: TextStyle(fontWeight: FontWeight.w900),)
-            ],
-          ),
+            CustomText(text: 'If the above answers are incorrect write correct answer in below box',color: Colors.black,align: TextAlign.center,),
 
-          CustomText(text: 'If the above answers are incorrect write correct answer in below box',color: Colors.black,align: TextAlign.center,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20,20,20,0),
+              child: QuestionInputField(text: 'Type Answer',controller: controller,),
+            ),
 
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20,20,20,0),
-            child: QuestionInputField(text: 'Type Answer',controller: controller,),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Button(text: 'Next',onclick: () async {
 
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Button(text: 'Next',onclick: () async {
-
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              String myMapString;
-              var myMap;
-              myMapString = prefs.getString('answerMap');
-              if (widget.answer != '1' && widget.answer != '2' &&
-                  widget.answer != '3' && widget.answer != '4') {
-                if (myMapString != null) {
-                  myMap = json.decode(myMapString);
-                  if (controller.text.toLowerCase() == widget.answer) {
-                    myMap[widget.qNo] = 'correct';
-                    prefs.setString('answerMap', json.encode(myMap));
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                String myMapString;
+                var myMap;
+                myMapString = prefs.getString('answerMap');
+                if (widget.answer != '1' && widget.answer != '2' &&
+                    widget.answer != '3' && widget.answer != '4') {
+                  if (myMapString != null) {
+                    myMap = json.decode(myMapString);
+                    if (controller.text.toLowerCase() == widget.answer) {
+                      myMap[widget.qNo] = 'correct';
+                      prefs.setString('answerMap', json.encode(myMap));
+                    }
+                    else {
+                      myMap[widget.qNo] = 'incorrect';
+                      prefs.setString('answerMap', json.encode(myMap));
+                    }
                   }
                   else {
-                    myMap[widget.qNo] = 'incorrect';
-                    prefs.setString('answerMap', json.encode(myMap));
+                    if (controller.text.toLowerCase() == widget.answer) {
+                      prefs.setString('answerMap', json.encode({widget
+                          .qNo: 'correct'}));
+                    }
+                    else {
+                      prefs.setString('answerMap', json.encode({widget
+                          .qNo: 'incorrect'}));
+                    }
                   }
                 }
+
+                if (widget.no == widget.qLength) {
+                  Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) {
+                    return Summary(totQuestions: widget.qLength,qname: widget.quizName);
+                  }));
+                }
+
                 else {
-                  if (controller.text.toLowerCase() == widget.answer) {
-                    prefs.setString('answerMap', json.encode({widget
-                        .qNo: 'correct'}));
-                  }
-                  else {
-                    prefs.setString('answerMap', json.encode({widget
-                        .qNo: 'incorrect'}));
-                  }
+                  var answers = prefs.getString('answerMap');
+                  print(json.decode(answers));
+                  int y = widget.no;
+                  Navigator.push(context, MyCustomRoute(builder: (context) {
+                    return Answer(quizName: widget.quizName, no: y + 1,);
+                  }));
                 }
               }
-
-              if (widget.no == widget.qLength) {
-                Navigator.pushReplacement(context, CupertinoPageRoute(builder: (context) {
-                  return Summary(totQuestions: widget.qLength,qname: widget.quizName);
-                }));
-              }
-
-              else {
-                var answers = prefs.getString('answerMap');
-                print(json.decode(answers));
-                int y = widget.no;
-                Navigator.push(context, MyCustomRoute(builder: (context) {
-                  return Answer(quizName: widget.quizName, no: y + 1,);
-                }));
-              }
-            }
-            ),
-          )
+              ),
+            )
 
 
-        ],
+          ],
+        ),
       ),
     );
   }
