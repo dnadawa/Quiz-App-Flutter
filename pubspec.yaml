@@ -9,18 +9,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^0.1.2
-  fluttertoast: ^4.0.1
-  font_awesome_flutter: ^8.8.1
-  firebase_core: ^0.4.4+3
-  image_picker: ^0.6.4
-  firebase_auth: ^0.15.5+3
-  cloud_firestore: ^0.13.4+2
-  firebase_storage: ^3.1.5
-  path: ^1.6.4
-  google_sign_in: ^4.3.0
-  shared_preferences: ^0.5.6+3
-  carousel_slider: ^1.4.1
+  cupertino_icons: ^0.1.5
+  fluttertoast: ^8.1.1
+  font_awesome_flutter: ^10.2.1
+  firebase_core: ^24.1.1
+  image_picker: ^0.8.6
+  firebase_auth: ^4.1.0
+  cloud_firestore: ^4.0.3
+  firebase_storage: ^11.0.3
+  path: ^1.8.2
+  google_sign_in: ^5.4.2
+  shared_preferences: ^2.0.15
+  carousel_slider: ^4.1.1
 
 
 dev_dependencies:
